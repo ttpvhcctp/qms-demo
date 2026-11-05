@@ -1,0 +1,161 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Máy tính bảng đánh giá – QMS đa điểm (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="tablet.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-swap" viewBox="0 0 24 24"><path d="M4 8h14l-4-4M20 16H6l4 4"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+    <symbol id="i-pause" viewBox="0 0 24 24"><path d="M9 5v14M15 5v14"/></symbol>
+    <symbol id="i-phone" viewBox="0 0 24 24"><rect x="6" y="2" width="12" height="20" rx="2"/><path d="M11 18h2"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M20 12A8 8 0 1 1 17.7 6.3"/></symbol>
+    <symbol id="i-hand" viewBox="0 0 24 24"><path d="M9 11V5a2 2 0 0 1 4 0v6M13 10a2 2 0 0 1 4 0v2M17 11a2 2 0 0 1 4 0v4a7 7 0 0 1-7 7h-1a7 7 0 0 1-5.6-2.8L4 15.5a2 2 0 0 1 3-2.6L9 15"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="device" id="device">
+    <span class="cam"></span>
+    <div class="tab" id="tab">
+
+      <!-- ===== CHỜ: trình chiếu ảnh ===== -->
+      <section class="scr scr-idle" data-s="idle">
+        <div class="slides" id="slides"></div>
+        <div class="idle-top">
+          <span class="chip-ctr">QUẦY 01</span>
+          <span class="idle-st">Sẵn sàng phục vụ</span>
+          <span class="clock num" data-clock></span>
+        </div>
+        <div class="idle-cap" id="idleCap"></div>
+        <div class="idle-chip">ẢNH MINH HỌA · thay bằng ảnh danh lam thắng cảnh</div>
+      </section>
+
+      <!-- ===== ĐANG PHỤC VỤ ===== -->
+      <section class="scr scr-serve" data-s="serve">
+        <header class="bar">
+          <span class="chip-ctr">QUẦY 01</span>
+          <span class="bar-org">Trung tâm Phục vụ hành chính công TP. Hồ Chí Minh</span>
+          <span class="clock num" data-clock></span>
+        </header>
+        <div class="serve-body">
+          <div class="staff">
+            <div class="avatar"><span id="ini">TH</span></div>
+            <b id="stName">NGUYỄN THỊ THANH HƯƠNG</b>
+            <span id="stRole">Chuyên viên</span>
+            <em id="stField">Đất đai · Cấp mới, cấp đổi</em>
+          </div>
+          <div class="ticket">
+            <span class="t-lbl" id="tLbl">ĐANG PHỤC VỤ SỐ</span>
+            <span class="t-num num" id="tNum">A-0063</span>
+            <span class="t-svc" id="tSvc"></span>
+            <span class="t-note" id="tNote"></span>
+          </div>
+        </div>
+        <footer class="serve-ft"><svg class="ic"><use href="#i-hand"/></svg>Sau khi hoàn tất, Quý công dân vui lòng đánh giá trên màn hình này</footer>
+      </section>
+
+      <!-- ===== ĐÁNH GIÁ 5 MỨC ===== -->
+      <section class="scr scr-rate" data-s="rate">
+        <header class="q-head">
+          <div>
+            <h1>Quý công dân có hài lòng với sự phục vụ?</h1>
+            <p id="rateSub">Lượt A-0063 · chạm 1 lần để đánh giá</p>
+          </div>
+          <div class="ring" id="ring1"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17"/><circle class="p" cx="20" cy="20" r="17"/></svg><b class="num"></b></div>
+        </header>
+        <div class="faces" id="faces"></div>
+      </section>
+
+      <!-- ===== LÝ DO ===== -->
+      <section class="scr scr-why" data-s="why">
+        <header class="q-head">
+          <div class="why-h">
+            <span class="why-face" id="whyFace"></span>
+            <div><h1>Điều gì khiến Quý công dân chưa hài lòng?</h1><p>Có thể chọn nhiều lý do</p></div>
+          </div>
+          <div class="ring" id="ring2"><svg viewBox="0 0 40 40"><circle cx="20" cy="20" r="17"/><circle class="p" cx="20" cy="20" r="17"/></svg><b class="num"></b></div>
+        </header>
+        <div class="reasons" id="reasons"></div>
+        <div class="why-act">
+          <button class="btn-g" data-a="skipWhy">Bỏ qua</button>
+          <button class="btn-p" data-a="send">Gửi đánh giá</button>
+        </div>
+      </section>
+
+      <!-- ===== CẢM ƠN ===== -->
+      <section class="scr scr-thanks" data-s="thanks">
+        <div class="th-main">
+          <div class="th-ok"><svg viewBox="0 0 52 52"><circle cx="26" cy="26" r="23"/><path d="M15 27l7 7 15-15"/></svg></div>
+          <h1>Cảm ơn Quý công dân đã đánh giá</h1>
+          <p id="thMsg">Ý kiến của Quý công dân giúp Trung tâm phục vụ tốt hơn.</p>
+        </div>
+        <div class="th-qr">
+          <div class="qr" aria-hidden="true"></div>
+          <b>Góp ý chi tiết</b>
+          <span>Quét mã bằng điện thoại</span>
+          <small>Mã minh họa</small>
+        </div>
+      </section>
+
+      <!-- ===== HƯỚNG DẪN CHUYỂN QUẦY ===== -->
+      <section class="scr scr-move" data-s="move">
+        <div class="mv-ic"><svg class="ic"><use href="#i-swap"/></svg></div>
+        <div>
+          <span class="mv-k">Mời Quý công dân sang</span>
+          <b class="mv-to">QUẦY <span class="num" id="mvTo">15</span> · <span id="mvName">Thuế</span></b>
+          <span class="mv-s">Giữ nguyên số <b class="num" id="mvNum">A-0063</b> · được ưu tiên gọi trước</span>
+          <span class="mv-s2">Sau khi xong tại quầy 15, Quý công dân quay lại quầy 01 để nhận kết quả</span>
+        </div>
+        <i class="mv-bar"><em id="mvBar"></em></i>
+      </section>
+
+      <!-- ===== TẠM NGƯNG ===== -->
+      <section class="scr scr-pause" data-s="pause">
+        <span class="chip-ctr g">QUẦY 01</span>
+        <div class="ps-ic"><svg class="ic"><use href="#i-pause"/></svg></div>
+        <h1>QUẦY TẠM NGƯNG PHỤC VỤ</h1>
+        <p>Mời Quý công dân đến quầy <b class="num">02, 03</b></p>
+      </section>
+    </div>
+  </div>
+
+  <!-- ===== BẢNG MÔ PHỎNG ===== -->
+  <aside class="sim" id="sim">
+    <h4>Bảng mô phỏng</h4>
+    <p class="note">Giả lập thao tác của cán bộ quầy 01. Công dân thao tác trực tiếp trên máy tính bảng. Mở với <code>?full=1</code> để chạy toàn màn hình.</p>
+    <div class="grp">
+      <span class="lbl">Thao tác của cán bộ</span>
+      <button data-sim="call" class="pri">Gọi số tiếp theo</button>
+      <div class="two"><button data-sim="arrive">Khách đã đến</button><button data-sim="done">Hoàn thành</button></div>
+      <div class="two"><button data-sim="skip">Bỏ qua</button><button data-sim="transfer">Chuyển quầy 15</button></div>
+      <div class="two"><button data-sim="back">Khách quay lại</button><button data-sim="pause">Tạm ngưng / mở</button></div>
+      <button data-sim="proxy">Thử "bấm hộ" (đánh giá 0,5 giây sau Hoàn thành)</button>
+    </div>
+    <div class="grp">
+      <span class="lbl">Hệ thống</span>
+      <label><input type="checkbox" id="offline"> Mất kết nối Local Server</label>
+      <label><input type="checkbox" id="auto"> Tự động mô phỏng</label>
+      <div class="qinfo" id="queued"></div>
+    </div>
+    <div class="grp">
+      <span class="lbl">Số liệu gửi về Dashboard</span>
+      <div class="kpi" id="kpi"></div>
+      <div class="dist" id="dist"></div>
+      <div class="log" id="log"></div>
+    </div>
+    <div class="toast" id="toast"></div>
+  </aside>
+</div>
+
+<script src="tablet.js"></script>
+</body>
+</html>

@@ -1,0 +1,3 @@
+Đặt ảnh thẻ cán bộ tại đây, đặt tên theo số quầy: 01.jpg, 02.jpg ...
+Ảnh vuông, tối thiểu 400 x 400 px, khuôn mặt ở giữa (giao diện tự cắt tròn).
+Thiếu ảnh thì màn hình hiển thị chữ viết tắt của tên.

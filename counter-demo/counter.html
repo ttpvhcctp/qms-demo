@@ -1,0 +1,164 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>Màn hình hiển thị tại quầy – QMS đa điểm (Demo)</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Be+Vietnam+Pro:wght@400;500;600;700;800&family=Roboto+Condensed:wght@700&display=swap" rel="stylesheet">
+<link rel="stylesheet" href="counter.css">
+</head>
+<body>
+
+<svg width="0" height="0" style="position:absolute" aria-hidden="true">
+  <defs>
+    <symbol id="i-coffee" viewBox="0 0 24 24"><path d="M4 9h13v5a5 5 0 0 1-5 5H9a5 5 0 0 1-5-5z"/><path d="M17 10h1.5a2.5 2.5 0 0 1 0 5H17M8 3v3M12 3v3"/></symbol>
+    <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
+    <symbol id="i-users" viewBox="0 0 24 24"><circle cx="9" cy="8" r="3"/><path d="M3 20c0-3.3 2.7-6 6-6s6 2.7 6 6M16 4a3 3 0 0 1 0 6M21 20c0-2.6-1.7-4.8-4-5.6"/></symbol>
+    <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
+    <symbol id="i-ticket" viewBox="0 0 24 24"><path d="M3 7a2 2 0 0 0 2-2h14a2 2 0 0 0 2 2v3a2 2 0 0 0 0 4v3a2 2 0 0 0-2 2H5a2 2 0 0 0-2-2v-3a2 2 0 0 0 0-4z"/><path d="M9 5v14" stroke-dasharray="2 2"/></symbol>
+    <symbol id="i-check" viewBox="0 0 24 24"><path d="M5 12l5 5L20 7"/></symbol>
+    <symbol id="i-tablet" viewBox="0 0 24 24"><rect x="4" y="2" width="16" height="20" rx="2"/><path d="M11 18h2"/><path d="M8.5 9.5h.01M15.5 9.5h.01M8.5 13a4 4 0 0 0 7 0"/></symbol>
+    <symbol id="i-arrow" viewBox="0 0 24 24"><path d="M4 12h15M13 6l6 6-6 6"/></symbol>
+    <symbol id="i-wifi-off" viewBox="0 0 24 24"><path d="M3 3l18 18M8.5 16.5a5 5 0 0 1 7 0M5 12.5a10 10 0 0 1 5-2.6M14 10a10 10 0 0 1 5 2.5M2 8.8a15 15 0 0 1 4.2-2.6M10.7 5A15 15 0 0 1 22 8.8M12 20h.01"/></symbol>
+    <symbol id="i-mega" viewBox="0 0 24 24"><path d="M3 10v4h3l7 5V5L6 10z"/><path d="M17 8a5 5 0 0 1 0 8M20 5a9 9 0 0 1 0 14"/></symbol>
+    <symbol id="i-redo" viewBox="0 0 24 24"><path d="M20 7v5h-5"/><path d="M20 12A8 8 0 1 1 17.7 6.3"/></symbol>
+  </defs>
+</svg>
+
+<div class="stage">
+  <div class="frame" id="frame">
+    <div class="scr" id="scr">
+
+      <!-- ===== CỘT TRÁI: SỐ QUẦY + CÁN BỘ (640 × 810) ===== -->
+      <section class="left">
+        <div class="cnt">
+          <span class="cnt-lbl">QUẦY</span>
+          <span class="cnt-num num" id="cntNum">01</span>
+        </div>
+        <div class="staff">
+          <div class="avatar" id="avatar"><span id="initials"></span><img id="photo" alt=""></div>
+          <div class="st-txt">
+            <div class="st-name" id="stName"></div>
+            <div class="st-role" id="stRole"></div>
+            <div class="st-field" id="stField"></div>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== KHỐI SỐ ĐANG PHỤC VỤ (1280 × 810) ===== -->
+      <section class="main">
+        <div class="m-top">
+          <span class="m-lbl" id="mLbl">ĐANG PHỤC VỤ</span>
+          <span class="m-off" id="mOff"><svg class="ic"><use href="#i-wifi-off"/></svg><b id="mOffTxt"></b></span>
+          <span class="m-clock num" id="clock">--:--</span>
+        </div>
+        <div class="m-block" id="mBlock">
+          <div class="m-serve">
+            <span class="cur num" id="curNum">A-0063</span>
+            <span class="m-svc" id="mSvc"></span>
+            <span class="m-tags" id="mTags"></span>
+          </div>
+          <div class="m-ready">
+            <svg class="ic"><use href="#i-ticket"/></svg>
+            <b>QUẦY SẴN SÀNG</b>
+            <span id="readyNext"></span>
+          </div>
+          <div class="m-thanks">
+            <svg class="ic"><use href="#i-tablet"/></svg>
+            <b>Cảm ơn Quý công dân</b>
+            <span>Mời đánh giá mức độ hài lòng trên máy tính bảng tại quầy</span>
+          </div>
+        </div>
+      </section>
+
+      <!-- ===== DẢI DỰ BÁO (1920 × 270) ===== -->
+      <section class="strip" id="strip">
+        <div class="s-lbl">
+          <b>SẮP GỌI</b>
+          <span id="sGroup"></span>
+          <span id="sCounters"></span>
+        </div>
+        <div class="chips" id="chips"></div>
+        <div class="s-empty" id="sEmpty"><svg class="ic"><use href="#i-ticket"/></svg><span id="sEmptyTxt">Hiện không có khách chờ, mời Quý khách lấy số</span></div>
+        <div class="stats">
+          <div class="stat"><span>ĐANG CHỜ</span><b class="num" id="stWait">0</b><small>người</small></div>
+          <div class="stat"><span>DỰ KIẾN</span><b class="num" id="stEta">0</b><small id="stEtaUnit">phút</small></div>
+        </div>
+      </section>
+
+      <!-- ===== TẠM NGƯNG (toàn màn hình xám) ===== -->
+      <div class="full full--pause" id="pause">
+        <span class="f-cnt">QUẦY <b class="num" id="pCnt">01</b></span>
+        <div class="f-ic"><svg class="ic"><use href="#i-coffee"/></svg></div>
+        <h2>QUẦY TẠM NGƯNG PHỤC VỤ</h2>
+        <p id="pBack"></p>
+        <div class="f-redirect" id="pRedirect"></div>
+      </div>
+
+      <!-- ===== CHƯA MỞ / NGOÀI GIỜ ===== -->
+      <div class="full full--closed" id="closed">
+        <span class="f-cnt">QUẦY <b class="num" id="cCnt">01</b></span>
+        <div class="f-ic"><svg class="ic"><use href="#i-moon"/></svg></div>
+        <h2>QUẦY CHƯA MỞ</h2>
+        <p id="cField"></p>
+        <div class="f-hours"><div><span>Buổi sáng</span><b class="num">07:30 – 11:30</b></div><div><span>Buổi chiều</span><b class="num">13:30 – 16:30</b></div></div>
+      </div>
+    </div>
+  </div>
+
+  <!-- ===== BẢNG MÔ PHỎNG (ẩn khi mở ?full=1) ===== -->
+  <aside class="sim" id="sim">
+    <h4>Bảng mô phỏng</h4>
+    <p class="note">Giả lập giao diện Cán bộ và các sự kiện hàng đợi. Không xuất hiện trên màn hình thật (mở với <code>?full=1</code>).</p>
+
+    <div class="grp">
+      <span class="lbl">Quầy hiển thị</span>
+      <select id="counterSel" aria-label="Chọn quầy"></select>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">Thao tác của cán bộ</span>
+      <button data-sim="next" class="pri">Gọi số tiếp theo <kbd>N</kbd></button>
+      <div class="two">
+        <button data-sim="recall">Gọi lại <kbd>R</kbd></button>
+        <button data-sim="done">Hoàn thành <kbd>H</kbd></button>
+      </div>
+      <div class="two">
+        <button data-sim="skip">Bỏ qua <kbd>S</kbd></button>
+        <button data-sim="transfer">Chuyển quầy 15</button>
+      </div>
+      <div class="two">
+        <select id="pauseSel" aria-label="Thời gian tạm ngưng"><option value="10">10 phút</option><option value="15" selected>15 phút</option><option value="30">30 phút</option></select>
+        <button data-sim="pause">Tạm ngưng</button>
+      </div>
+      <button data-sim="resume">Mở lại quầy</button>
+      <button data-sim="logout">Đăng xuất / chưa mở quầy</button>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">Sự kiện hàng đợi</span>
+      <button data-sim="issue">Kiosk cấp thêm số</button>
+      <button data-sim="other">Quầy khác gọi số đầu hàng</button>
+      <button data-sim="vip">Lễ tân xác nhận số ưu tiên (V)</button>
+      <button data-sim="booking">Công dân đặt lịch check-in</button>
+      <button data-sim="incoming">Nhận số chuyển đến từ quầy 06</button>
+      <button data-sim="return">Khách quay lại từ quầy 15</button>
+      <button data-sim="clear">Hết khách chờ</button>
+      <button data-sim="example" class="pri">Chạy ví dụ quy tắc chèn 4 bước</button>
+    </div>
+
+    <div class="grp">
+      <span class="lbl">Hệ thống</span>
+      <label><input type="checkbox" id="offline"> Mất kết nối Local Server</label>
+      <label><input type="checkbox" id="auto"> Tự động mô phỏng ca làm việc</label>
+    </div>
+    <div class="toast" id="toast"></div>
+  </aside>
+</div>
+
+<script src="queue-engine.js"></script>
+<script src="counter.js"></script>
+</body>
+</html>
